@@ -22,6 +22,12 @@ app.post('/api/formulario', async (req, res) => {
 }
 });
 
+app.get('/api/formulario', async (req, res) => {
+  const dados = await Formulario.find();
+  res.json(dados);
+});
+
+
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
