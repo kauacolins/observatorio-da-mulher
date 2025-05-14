@@ -12,9 +12,24 @@ export default function FormularioMultiStep() {
     formState: { errors },
   } = useForm({ mode: "onTouched" });
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
-  };
+  const onSubmit = async (data) => {
+  try {
+    const response = await fetch('http://localhost:5000/api/formulario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert('Formulário enviado com sucesso!');
+    } else {
+      alert('Erro ao enviar o formulário.');
+    }
+  } catch (error) {
+    console.error('Erro ao enviar:', error);
+    alert('Erro de conexão com o servidor.');
+  }
+};
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
