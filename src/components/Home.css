@@ -1,0 +1,48 @@
+.container-main {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr; /* duas colunas de tamanhos iguais */
+    align-items: center;
+    height: 80vh;
+    padding: 0 50px;
+    gap: 20px; /* espaçamento entre as colunas, opcional */
+}
+
+.text-main .column {
+    height: 100%;
+    background-color: blueviolet;
+}
+
+.text-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* garante que o texto fique à esquerda da sua coluna */
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    font-size: 3.2em;
+}
+
+.title span {
+    color: blueviolet;
+}
+
+.ilustration {
+    background-color: aqua;
+    height: 100%; /* ocupa toda a altura da coluna */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.btn-primary {
+  padding: 10px 40px;
+  background-color: #8a2be2;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+}

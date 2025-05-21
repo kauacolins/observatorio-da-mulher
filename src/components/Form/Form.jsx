@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Navbar from "../Navbar";
 
 const Bairros = ["Centro", "Jardim das Flores", "Vila Nova", "Parque Industrial", "Outro"];
 
@@ -36,18 +37,20 @@ export default function FormularioMultiStep() {
 
   // CSS para o indicador de etapas
   const steps = [
-    { label: "Residência", number: 1 },
+    { label: "Educação", number: 1 },
     { label: "Saúde", number: 2 },
     { label: "Violência", number: 3 },
     { label: "Final", number: 4 },
   ];
 
   return (
+    <>
+    <Navbar/>
     <div className="container min-vh-100 d-flex align-items-center justify-content-center">
-      <div className="col-12 col-md-10 col-lg-8">
+      <div className="col-12 col-md-10 col-lg-15">
         {/* Indicador de etapas */}
-        <ul className="nav justify-content-center mb-4">
-          {steps.map((s, idx) => (
+        <ul className="nav justify-content-center mt-5 mb-5">
+          {steps.map((s) => (
             <li className="nav-item text-center" key={s.number} style={{ width: "25%" }}>
               <span
                 className={`d-inline-block rounded-circle mb-1 step-indicator ${step === s.number ? "active" : step > s.number ? "done" : ""}`}
@@ -55,7 +58,7 @@ export default function FormularioMultiStep() {
                   width: 36,
                   height: 36,
                   lineHeight: "36px",
-                  background: step === s.number ? "#0d6efd" : step > s.number ? "#198754" : "#e9ecef",
+                  background: step === s.number ? "#8a2be2" : step > s.number ? "#198754" : "#e9ecef",
                   color: step === s.number || step > s.number ? "#fff" : "#495057",
                   fontWeight: "bold",
                   fontSize: 18,
@@ -68,24 +71,25 @@ export default function FormularioMultiStep() {
           ))}
         </ul>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-white border rounded shadow p-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl shadow p-5">
           {step === 1 && (
             <div>
               <h2 className="h5 fw-bold mb-4">Etapa 1: Residência e Educação</h2>
               <div className="row mb-3">
                 <div className="col-md-6 mb-3 mb-md-0">
                   <label className="form-label">Qual bairro da sua residência?</label>
-                  <select {...register("bairro", { required: true })} className="form-select">
+                  <select {...register("bairro", { required: true })} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione um bairro</option>
                     {Bairros.map((b, i) => (
                       <option key={i} value={b}>{b}</option>
                     ))}
                   </select>
+                  
                   {errors.bairro && <div className="text-danger small">Este campo é obrigatório.</div>}
                 </div>
                 <div className="col-md-6">
                   <label className="form-label">Tempo de interrupção dos estudos</label>
-                  <select {...register("tempoInterrupcao")} className="form-select">
+                  <select {...register("tempoInterrupcao")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione</option>
                     <option value="Menos de 1 ano">Menos de 1 ano</option>
                     <option value="1 a 3 anos">1 a 3 anos</option>
@@ -111,7 +115,7 @@ export default function FormularioMultiStep() {
                 </div>
                 <div className="col-md-6">
                   <label className="form-label">Se não está estudando, qual motivo?</label>
-                  <select {...register("motivoNaoEstuda")} className="form-select">
+                  <select {...register("motivoNaoEstuda")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione uma opção</option>
                     <option value="Trabalho">Necessidade de trabalhar</option>
                     <option value="Gravidez">Gravidez/Maternidade</option>
@@ -125,7 +129,7 @@ export default function FormularioMultiStep() {
               <div className="row mb-3">
                 <div className="col-md-6 mb-3 mb-md-0">
                   <label className="form-label">Dificuldades para continuar estudando</label>
-                  <select {...register("dificuldades")} className="form-select">
+                  <select {...register("dificuldades")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione</option>
                     <option value="Trabalho">Falta de tempo devido ao trabalho</option>
                     <option value="Filhos">Falta de apoio com os filhos</option>
@@ -150,9 +154,9 @@ export default function FormularioMultiStep() {
                   {errors.ead && <div className="text-danger small">Obrigatório.</div>}
                 </div>
               </div>
-              <div className="mb-3">
-                <label className="form-label">Como avalia a EAD?</label>
-                <select {...register("avaliacaoEAD")} className="form-select">
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Como avalia a EAD?</label>
+                <select {...register("avaliacaoEAD")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                   <option value="">Selecione</option>
                   <option value="Muito Boa">Muito Boa</option>
                   <option value="Boa">Boa</option>
@@ -250,7 +254,7 @@ export default function FormularioMultiStep() {
               <div className="row mb-3">
                 <div className="col-md-6 mb-3 mb-md-0">
                   <label className="form-label">Quais tipos de violência você sofreu?</label>
-                  <select {...register("tipoViolencia")} className="form-select">
+                  <select {...register("tipoViolencia")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione</option>
                     <option value="Física">Física</option>
                     <option value="Psicológica/Emocional">Psicológica/Emocional</option>
@@ -263,7 +267,7 @@ export default function FormularioMultiStep() {
                 </div>
                 <div className="col-md-6">
                   <label className="form-label">Quem foi o autor da violência?</label>
-                  <select {...register("autorViolencia")} className="form-select">
+                  <select {...register("autorViolencia")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione</option>
                     <option value="Marido/Companheiro">Marido/Companheiro</option>
                     <option value="Ex-Marido/Ex-Companheiro">Ex-Marido/Ex-Companheiro</option>
@@ -278,7 +282,7 @@ export default function FormularioMultiStep() {
               <div className="row mb-3">
                 <div className="col-md-6 mb-3 mb-md-0">
                   <label className="form-label">Frequência da violência</label>
-                  <select {...register("frequenciaViolencia")} className="form-select">
+                  <select {...register("frequenciaViolencia")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione</option>
                     <option value="Uma vez">Uma única vez</option>
                     <option value="Algumas vezes">Algumas vezes</option>
@@ -308,7 +312,7 @@ export default function FormularioMultiStep() {
               <div className="row mb-3">
                 <div className="col-md-6 mb-3 mb-md-0">
                   <label className="form-label">Onde procurou ajuda?</label>
-                  <select {...register("ondeAjuda")} className="form-select">
+                  <select {...register("ondeAjuda")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione</option>
                     <option value="Delegacia da mulher">Delegacia da mulher</option>
                     <option value="Centro de referência">Centro de referência</option>
@@ -321,7 +325,7 @@ export default function FormularioMultiStep() {
                 </div>
                 <div className="col-md-6">
                   <label className="form-label">Avaliação do atendimento recebido</label>
-                  <select {...register("avaliacaoAjuda")} className="form-select">
+                  <select {...register("avaliacaoAjuda")} className="block w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-gray-900 transition">
                     <option value="">Selecione</option>
                     <option value="Muito boa">Muito boa</option>
                     <option value="Boa">Boa</option>
@@ -356,22 +360,25 @@ export default function FormularioMultiStep() {
             </div>
           )}
 
-          <div className="d-flex justify-content-between mt-4">
-            {step > 1 && (
-              <button type="button" onClick={prevStep} className="btn btn-secondary">
-                Voltar
-              </button>
-            )}
-            {step < 4 ? (
-              <button type="button" onClick={nextStep} className="btn btn-primary ms-auto">
-                Próximo
-              </button>
-            ) : (
-              <button type="submit" className="btn btn-success ms-auto">
-                Enviar
-              </button>
-            )}
-          </div>
+            <div className="d-flex justify-content-between mt-4">
+              {step > 1 && (
+                <button type="button" onClick={prevStep} className="btn btn-secondary">
+                  Voltar
+                </button>
+              )}
+
+              {step < 4 && (
+                <button type="button" onClick={nextStep} className="btn btn-primary ms-auto">
+                  Próximo
+                </button>
+              )}
+
+              {step === 4 && (
+                <button type="submit" className="btn btn-success ms-auto">
+                  Enviar
+                </button>
+              )}
+            </div>
         </form>
       </div>
       {/* CSS do indicador de etapas */}
@@ -385,5 +392,6 @@ export default function FormularioMultiStep() {
         }
       `}</style>
     </div>
+    </>
   );
 }

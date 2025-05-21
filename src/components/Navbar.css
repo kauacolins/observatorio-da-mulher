@@ -1,41 +1,32 @@
+/* Estilo da navbar */
 .navbar {
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 32px 32px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-logo {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-logo img {
-  height: 40px;
-  margin-right: 10px;
-}
-
-.navbar-logo span {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-}
-
-.navbar-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.navbar-links li a {
+/* Container dos links */
+.navbar .navlink {
+  color: #374151; /* cinza escuro */
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.3s;
+  font-weight: 600;
+  margin-left: 10px;
+  padding: 8px 24px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.navbar-links li a:hover {
-  color: #007BFF;
+/* Hover nos links */
+.navbar .navlink:hover {
+  background-color:#8a2be2; /* roxo */
+  color: white;
+}
+
+/* Opcional: destacar link ativo */
+.navbar .navlink.active {
+  background-color:blueviolet;
+  color: white;
 }
