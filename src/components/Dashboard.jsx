@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   PieChart, Pie, Cell, Tooltip,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend,
+  ResponsiveContainer
 } from 'recharts';
 
 const cores = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#00C49F'];
@@ -40,44 +41,66 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="p-6 space-y-8">
-      <h1 className="text-2xl font-bold">Dashboard de Respostas</h1>
+    <div className="min-h-screen bg-gray-50 py-8 px-2">
+      <div className="max-w-6xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Dashboard de Respostas</h1>
+          <p className="text-gray-500">Visualize os principais indicadores das respostas coletadas.</p>
+        </header>
 
-      <div>
-        <h2 className="text-lg font-semibold">Distribuição por Bairro</h2>
-        <BarChart width={500} height={300} data={dadosPorBairro}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis allowDecimals={false} />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="total" fill="#8884d8" />
-        </BarChart>
-      </div>
-
-      <div className="flex flex-wrap gap-12">
-        <div>
-          <h2 className="text-lg font-semibold">Estudando x Não</h2>
-          <PieChart width={300} height={250}>
-            <Pie data={dadosEstudo} dataKey="value" nameKey="name" outerRadius={100}>
-              {dadosEstudo.map((entry, index) => (
-                <Cell key={index} fill={cores[index % cores.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div className="bg-white rounded shadow p-6 flex flex-col">
+            <h2 className="text-lg font-semibold mb-4 text-gray-700">Distribuição por Bairro</h2>
+            <div className="flex-1 min-h-[300px]">
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={dadosPorBairro}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="total" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          <div className="bg-white rounded shadow p-6 flex flex-col justify-between">
+            <h2 className="text-lg font-semibold mb-4 text-gray-700">Estudando x Não</h2>
+            <div className="flex-1 min-h-[300px] flex items-center justify-center">
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie data={dadosEstudo} dataKey="value" nameKey="name" outerRadius={90} label>
+                    {dadosEstudo.map((entry, index) => (
+                      <Cell key={index} fill={cores[index % cores.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <h2 className="text-lg font-semibold">Plano de Saúde</h2>
-          <PieChart width={300} height={250}>
-            <Pie data={dadosSaude} dataKey="value" nameKey="name" outerRadius={100}>
-              {dadosSaude.map((entry, index) => (
-                <Cell key={index} fill={cores[index % cores.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white rounded shadow p-6 flex flex-col justify-between">
+            <h2 className="text-lg font-semibold mb-4 text-gray-700">Plano de Saúde</h2>
+            <div className="flex-1 min-h-[300px] flex items-center justify-center">
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie data={dadosSaude} dataKey="value" nameKey="name" outerRadius={90} label>
+                    {dadosSaude.map((entry, index) => (
+                      <Cell key={index} fill={cores[index % cores.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          {/* Espaço reservado para futuros gráficos ou widgets */}
+          <div className="bg-white rounded shadow p-6 flex items-center justify-center text-gray-400 text-lg">
+            <span>Adicione mais gráficos ou informações aqui</span>
+          </div>
         </div>
       </div>
     </div>
