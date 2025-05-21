@@ -31,7 +31,6 @@
 }
 
 .ilustration {
-    background-color: aqua;
     height: 100%; /* ocupa toda a altura da coluna */
     display: flex;
     align-items: center;
